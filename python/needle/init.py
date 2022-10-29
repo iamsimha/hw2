@@ -1,5 +1,6 @@
 import math
 import needle as ndl
+import pdb
 
 
 
@@ -49,25 +50,35 @@ def one_hot(n, i, device=None, dtype="float32", requires_grad=False):
 
 def xavier_uniform(fan_in, fan_out, gain=1.0, **kwargs):
     ### BEGIN YOUR SOLUTION
-    raise NotImplementedError()
+    # return ndl.Tensor()
+    r = gain * math.sqrt(6 / (fan_in + fan_out))
+    return rand(fan_in, fan_out, low=-r, high=r, **kwargs)
+
     ### END YOUR SOLUTION
 
 
 def xavier_normal(fan_in, fan_out, gain=1.0, **kwargs):
     ### BEGIN YOUR SOLUTION
-    raise NotImplementedError()
+    r = gain * math.sqrt(2 / (fan_in + fan_out))
+    return randn(fan_in, fan_out, mean=0, std=r, **kwargs)
     ### END YOUR SOLUTION
 
 
 def kaiming_uniform(fan_in, fan_out, nonlinearity="relu", **kwargs):
     assert nonlinearity == "relu", "Only relu supported currently"
     ### BEGIN YOUR SOLUTION
-    raise NotImplementedError()
+    if nonlinearity == "relu":
+        gain = math.sqrt(2)
+
+    r = gain * math.sqrt(3/fan_in)
+    return rand(fan_in, fan_out, low=-r, high=r, **kwargs)
     ### END YOUR SOLUTION
 
 
 def kaiming_normal(fan_in, fan_out, nonlinearity="relu", **kwargs):
     assert nonlinearity == "relu", "Only relu supported currently"
     ### BEGIN YOUR SOLUTION
-    raise NotImplementedError()
+    if nonlinearity == "relu":
+        gain = math.sqrt(2)
+    return randn(fan_in, fan_out, mean=0, std=gain/math.sqrt(fan_in), **kwargs)
     ### END YOUR SOLUTION
