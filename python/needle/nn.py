@@ -150,10 +150,10 @@ class BatchNorm1d(Module):
         self.eps = eps
         self.momentum = momentum
         ### BEGIN YOUR SOLUTION
-        self.weight = Parameter(init.ones(dim))
-        self.bias = Parameter(init.zeros(dim))
-        self.running_mean = init.zeros(dim)
-        self.running_var = init.ones(dim)
+        self.weight = Parameter(init.ones(dim, device=device, dtype=dtype))
+        self.bias = Parameter(init.zeros(dim, device=device, dtype=dtype))
+        self.running_mean = init.zeros(dim, device=device, dtype=dtype)
+        self.running_var = init.ones(dim, device=device, dtype=dtype)
         ### END YOUR SOLUTION
 
 
@@ -183,8 +183,8 @@ class LayerNorm1d(Module):
         self.dim = dim
         self.eps = eps
         ### BEGIN YOUR SOLUTION
-        self.weight = Parameter(init.ones(dim).reshape((1, dim)))
-        self.bias = Parameter(init.zeros(dim).reshape((1, dim)))
+        self.weight = Parameter(init.ones(dim, device=device, dtype=dtype).reshape((1, dim)))
+        self.bias = Parameter(init.zeros(dim, device=device, dtype=dtype).reshape((1, dim)))
         ### END YOUR SOLUTION
 
     def forward(self, x: Tensor) -> Tensor:
